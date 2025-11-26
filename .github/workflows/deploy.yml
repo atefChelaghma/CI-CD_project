@@ -24,3 +24,15 @@ jobs:
           node-version: '20.19'
       - run: npm install
       - run: npm run test
+  cypress-e2e:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v3
+      - name: use node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.19'
+      - run: npm install
+      - run: npm run test:e2e
