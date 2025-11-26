@@ -1,21 +1,18 @@
 name: app-deploy
 on: push
 jobs:
-  lint:
+  build:
     runs-on: ubuntu-latest
-    steps:
-      - name: checkout repo
+    steps: 
+      - name: checkout lint
         uses: actions/checkout@v3
       - name: use node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.19'
+        node-version: '20.19'
       - run: npm install
       - run: npm run lint
-  build:
-    runs-on: ubuntu-latest
-    steps: 
-      - name: checkout repo
+      - name: checkout build
         uses: actions/checkout@v3
       - name: use node.js
         uses: actions/setup-node@v3
@@ -27,7 +24,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: checkout test
         uses: actions/checkout@v3
       - name: use node.js
         uses: actions/setup-node@v3
@@ -39,7 +36,7 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
-      - name: checkout repo
+      - name: checkout test cypress-e2e
         uses: actions/checkout@v3
       - name: use node.js
         uses: actions/setup-node@v3
